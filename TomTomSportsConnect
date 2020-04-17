@@ -1,5 +1,10 @@
 #! /bin/bash
 
+if ! xhost | grep -q "^LOCAL:"; then
+	xhost +local:
+	XHOST_TOMTOMSC=1
+fi
+
 docker run \
     --privileged \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -12,3 +17,6 @@ docker run \
     --rm \
     tomtomsc:latest
 
+if [ -v XHOST_TOMTOMSC ]; then
+	xhost -local:
+fi
