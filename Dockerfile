@@ -1,6 +1,5 @@
 # Base image
-# See https://github.com/phusion/baseimage-docker
-FROM phusion/baseimage
+FROM ubuntu:16.04
 
 LABEL author="Paulo A. Silva"
 LABEL url="https://github.com/PauloASilva/TomTomSportsConnect"
