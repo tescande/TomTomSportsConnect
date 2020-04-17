@@ -5,13 +5,9 @@ LABEL author="Paulo A. Silva"
 LABEL url="https://github.com/PauloASilva/TomTomSportsConnect"
 LABEL description="Containerized TomTom Sports Connect"
 
-RUN apt-get update && apt-get install wget
-
-ENV PACKAGE="tomtomsportsconnect.x86_64.deb"
-ENV URL="https://sports.tomtom-static.com/downloads/desktop/mysportsconnect/latest/$PACKAGE"
-
 # Handle dependencies
-RUN apt-get install -y \
+RUN apt-get update && \
+    apt-get install -y \
     network-manager \
     libgstreamer0.10-0 \
     libgstreamer-plugins-base0.10-0 \
@@ -20,6 +16,8 @@ RUN apt-get install -y \
     "libsm6" \
     curl
 
+ENV PACKAGE="tomtomsportsconnect.x86_64.deb"
+ENV URL="https://sports.tomtom-static.com/downloads/desktop/mysportsconnect/latest/$PACKAGE"
 
 RUN curl -Lk -o /tmp/$PACKAGE $URL
 
@@ -36,8 +34,7 @@ RUN cp $POSTINST "$POSTINST.bak" && \
 #
 
 # Cleanup
-RUN apt-get remove -y --purge wget && \
-    apt-get autoremove -y && \
+RUN apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -r /tmp/*
