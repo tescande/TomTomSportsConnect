@@ -8,13 +8,13 @@ LABEL description="Containerized TomTom Sports Connect"
 # Handle dependencies
 RUN apt-get update && \
     apt-get install -y \
-    network-manager \
-    libgstreamer0.10-0 \
-    libgstreamer-plugins-base0.10-0 \
-    libgl1-mesa-glx \
-    "libxslt1.1" \
-    "libsm6" \
-    curl
+            network-manager \
+            libgstreamer0.10-0 \
+            libgstreamer-plugins-base0.10-0 \
+            libgl1-mesa-glx \
+            libxslt1.1 \
+            libsm6 \
+            curl
 
 ENV PACKAGE="tomtomsportsconnect.x86_64.deb"
 ENV URL="https://sports.tomtom-static.com/downloads/desktop/mysportsconnect/latest/$PACKAGE"
@@ -31,7 +31,6 @@ RUN cp $POSTINST "$POSTINST.bak" && \
     head -n-2 "$POSTINST.bak" > "$POSTINST" && \
     rm "$POSTINST.bak" && \
     apt-get -f install
-#
 
 # Cleanup
 RUN apt-get autoremove -y && \
@@ -42,4 +41,3 @@ RUN apt-get autoremove -y && \
 ENV PATH="$PATH:/usr/local/TomTomSportsConnect/bin/"
 
 CMD ["TomTomSportsConnect"]
-
