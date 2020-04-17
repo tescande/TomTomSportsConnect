@@ -17,7 +17,9 @@ RUN apt-get install -y \
     libgstreamer-plugins-base0.10-0 \
     libgl1-mesa-glx \
     "libxslt1.1" \
-    "libsm6"
+    "libsm6" \
+    curl
+
 
 RUN curl -Lk -o /tmp/$PACKAGE $URL
 
